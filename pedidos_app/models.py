@@ -52,3 +52,15 @@ class pedido(models.Model):
 
     def __str__(self):
          return f"{self.id}:{self.fecha}"
+    
+class item(models.Model):
+     cantidad = models.PositiveBigIntegerField()
+     precio_unitario = models.PositiveBigIntegerField()
+     pedido = models.ForeignKey(pedido, on_delete=models.CASCADE, related_name="pedido")
+     producto = models.ForeignKey(producto, on_delete=models.PROTECT, related_name="producto")
+
+     class meta:
+          verbose_name_plurar = "Items"
+    
+     def __str__(self): 
+         return f"{self.cantidad}:{self.precio_unitario}"
