@@ -37,3 +37,18 @@ class cliente (models.Model):
         ordering = ["nombre"]
     def __str__(self):
             return f"{self.nombre} ${self.email}"
+
+
+#----------------------Foraneas--------------------------
+
+class pedido(models.Model):
+    fecha = models.DateField()
+    pagado = models.BooleanField()
+    cliente = models.ForeignKey(cliente, on_delete=models.CASCADE, related_name="cliente")
+    
+    class meta:
+        verbose_name_plurar = "Pedidos"
+        ordering =["fecha"]
+
+    def __str__(self):
+         return f"{self.id}:{self.fecha}"
